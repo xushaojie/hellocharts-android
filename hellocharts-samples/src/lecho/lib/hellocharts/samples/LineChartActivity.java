@@ -2,7 +2,7 @@ package lecho.lib.hellocharts.samples;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,7 +27,7 @@ import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.Chart;
 import lecho.lib.hellocharts.view.LineChartView;
 
-public class LineChartActivity extends ActionBarActivity {
+public class LineChartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,7 +189,7 @@ public class LineChartActivity extends ActionBarActivity {
         private void generateValues() {
             for (int i = 0; i < maxNumberOfLines; ++i) {
                 for (int j = 0; j < numberOfPoints; ++j) {
-                    randomNumbersTab[i][j] = (float) Math.random() * 100f;
+                    randomNumbersTab[i][j] = (float) Math.random() * -10f + 5;
                 }
             }
         }
@@ -215,8 +215,8 @@ public class LineChartActivity extends ActionBarActivity {
         private void resetViewport() {
             // Reset viewport height range to (0,100)
             final Viewport v = new Viewport(chart.getMaximumViewport());
-            v.bottom = 0;
-            v.top = 100;
+            v.bottom = -10;
+            v.top = 10;
             v.left = 0;
             v.right = numberOfPoints - 1;
             chart.setMaximumViewport(v);
@@ -224,7 +224,6 @@ public class LineChartActivity extends ActionBarActivity {
         }
 
         private void generateData() {
-
             List<Line> lines = new ArrayList<Line>();
             for (int i = 0; i < numberOfLines; ++i) {
 
@@ -243,7 +242,7 @@ public class LineChartActivity extends ActionBarActivity {
                 line.setHasLines(hasLines);
                 line.setHasPoints(hasPoints);
                 line.setHasGradientToTransparent(hasGradientToTransparent);
-                if (pointsHaveDifferentColor){
+                if (pointsHaveDifferentColor) {
                     line.setPointColor(ChartUtils.COLORS[(i + 1) % ChartUtils.COLORS.length]);
                 }
                 lines.add(line);
@@ -267,7 +266,6 @@ public class LineChartActivity extends ActionBarActivity {
 
             data.setBaseValue(Float.NEGATIVE_INFINITY);
             chart.setLineChartData(data);
-
         }
 
         /**
@@ -287,19 +285,16 @@ public class LineChartActivity extends ActionBarActivity {
 
         private void toggleLines() {
             hasLines = !hasLines;
-
             generateData();
         }
 
         private void togglePoints() {
             hasPoints = !hasPoints;
-
             generateData();
         }
 
         private void toggleGradient() {
             hasGradientToTransparent = !hasGradientToTransparent;
-
             generateData();
         }
 
@@ -334,10 +329,8 @@ public class LineChartActivity extends ActionBarActivity {
                 // In this case, if I want animation I have to set current viewport first and use animation listener.
                 // Max viewport will be set in onAnimationFinished method.
                 chart.setViewportAnimationListener(new ChartAnimationListener() {
-
                     @Override
                     public void onAnimationStarted() {
-                        // TODO Auto-generated method stub
 
                     }
 
@@ -352,42 +345,35 @@ public class LineChartActivity extends ActionBarActivity {
                 // Set current viewpirt with animation;
                 chart.setCurrentViewportWithAnimation(v);
             }
-
         }
 
         private void toggleFilled() {
             isFilled = !isFilled;
-
             generateData();
         }
 
         private void togglePointColor() {
             pointsHaveDifferentColor = !pointsHaveDifferentColor;
-
             generateData();
         }
 
         private void setCircles() {
             shape = ValueShape.CIRCLE;
-
             generateData();
         }
 
         private void setSquares() {
             shape = ValueShape.SQUARE;
-
             generateData();
         }
 
         private void setDiamonds() {
             shape = ValueShape.DIAMOND;
-
             generateData();
         }
 
         private void toggleLabels() {
             hasLabels = !hasLabels;
-
             if (hasLabels) {
                 hasLabelForSelected = false;
                 chart.setValueSelectionEnabled(hasLabelForSelected);
@@ -404,19 +390,16 @@ public class LineChartActivity extends ActionBarActivity {
             if (hasLabelForSelected) {
                 hasLabels = false;
             }
-
             generateData();
         }
 
         private void toggleAxes() {
             hasAxes = !hasAxes;
-
             generateData();
         }
 
         private void toggleAxesNames() {
             hasAxesNames = !hasAxesNames;
-
             generateData();
         }
 
@@ -443,10 +426,8 @@ public class LineChartActivity extends ActionBarActivity {
 
             @Override
             public void onValueDeselected() {
-                // TODO Auto-generated method stub
-
             }
-
         }
     }
+
 }
